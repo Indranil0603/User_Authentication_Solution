@@ -36,6 +36,10 @@ const userSchema = new mongoose.Schema({
 	},
 });
 
+// Create an index on the email field
+userSchema.index({ email: 1 }, { unique: true });
+
+// Hash the password using bcrypt on saving the user
 userSchema.pre("save", async function (next) {
 	try {
 		if (this.isModified("password") || this.isNew) {
@@ -49,6 +53,7 @@ userSchema.pre("save", async function (next) {
 	}
 });
 
+// Function to compare passwords
 userSchema.methods.comparePassword = async function (candidatePassword) {
 	try {
 		return await bcrypt.compare(candidatePassword, this.password);
