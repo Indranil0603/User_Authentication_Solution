@@ -1,0 +1,26 @@
+
+service: AuthenticationService
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  memorySize: 2048
+  stage: dev
+  timeout: 15
+  region: ap-south-1
+
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http: ANY /{proxy+}
+      - http: ANY /
+    environment:
+      PORT: 5000
+      NODE_ENV: production
+      MONGODB_URL: mongodb+srv://indranilsen1983:qvuuPPKTVcJH8aDH@cluster0.rpssqp3.mongodb.net/?retryWrites=true&w=majority
+      JWT_SECRET: fauosdhof7yah4wtyqhfqhfuqghfuo
+

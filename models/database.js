@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
-import { config } from "dotenv";
+const mongoose = require("mongoose");
+const { config } = require("dotenv");
 
 config();
 
+//Connection to databse established
 mongoose.connect(process.env.MONGODB_URL);
 
-export default mongoose.connection;
+module.exports = mongoose.connection;
